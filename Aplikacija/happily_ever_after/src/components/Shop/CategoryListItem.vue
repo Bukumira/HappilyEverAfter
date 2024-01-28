@@ -1,7 +1,7 @@
 <template>
     <div :class="this.open?'slika openImg':'slika'" :style="`background-image: url(http://localhost:3000${pred.img})`">
-        <img class="srce" v-if="isCoord===false" :src="likeImg" @click="like()"/>
-        <img class="reserved" v-if="reserved && isCoord===false" src="src/assets/reserved.png" @click="like()"/>
+        <img class="srce" v-if="isCoord==='false'" :src="likeImg" @click="like()"/>
+        <img class="reserved" v-if="reserved && isCoord==='false'" src="src/assets/reserved.png" @click="like()"/>
         <img v-if="open" class="close" src="src/assets/close.png" @click="close()"/>
     </div>
     <div :class="open?'opis openText':'opis'" @click="otvori()">
@@ -40,7 +40,7 @@
             </p>
             <a v-if="open && pred.link" :href="pred.link">{{ pred.link }}</a>
 
-        <div class="extra" v-if="open && isCoord===false">
+        <div class="extra" v-if="open && isCoord==='false'">
             <h2 class="naslov">Rezervišite</h2>
             <label for="godina">Godina </label>
             <select name="godina" v-model="godina">
@@ -91,7 +91,7 @@
                     <h2>{{ review.grade }}</h2>
                 </div>
             </div>
-            <div class="add_review" v-if="can_review && !added_review && isCoord===false">
+            <div class="add_review" v-if="can_review && !added_review && isCoord==='false'">
                 <div class="starPos">
                     <Stars @grade="grade"></Stars>
                 </div>
@@ -138,6 +138,10 @@
         can_review:{
             type:Boolean,
             default:true
+        },
+        isCoord:{
+            type:String,
+            default:localStorage.getItem("isCoord")
         }
     },
     data(){
@@ -154,7 +158,6 @@
             br_dana:0,
             added_review:false,
             tried_reserve:false,
-            isCoord:localStorage.getItem("isCoord"),
         }
     },
     mounted(){
