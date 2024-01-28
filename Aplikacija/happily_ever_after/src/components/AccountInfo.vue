@@ -1,10 +1,5 @@
 <template>
   <div class="acccontainer">
-    <div class="photo">
-      <input class="file" type="file" accept="image/*" @change="handleFileUpload" />
-      <button @click="uploadImage">Upload</button>
-      <img v-if="imageUrl" :src="imageUrl" alt="Uploaded Image" />
-    </div>
     <div class="head row">
       <div class="title">
         <h3>VAŠ NALOG</h3>
@@ -96,51 +91,6 @@ export default {
         console.log(error.message)
         this.error = 'Error saving user data.'
       }
-    },
-
-    handleFileUpload(event) {
-      console.log(event)
-      console.log('selected fajl kroz event: ' + event.target.files[0])
-      this.selectedFile = event.target.files[0]
-    },
-    uploadImage() {
-      if (this.selectedFile) {
-        console.log('selected file je: ' + this.selectedFile)
-        console.log(JSON.stringify(this.selectedFile))
-        const formData = new FormData()
-        formData.append('picture', this.selectedFile)
-        console.log(this.posts)
-        const userEmail = localStorage.getItem('token')
-
-        console.log('from cookie' + userEmail)
-        // const currentUserId;
-        axios
-          .get('http://localhost:3000/user/email/' + localStorage.getItem('token'))
-          .then((response) => {
-            console.log('Response from axios')
-            console.log(response)
-            console.log(response.data._id)
-            this.posts.userId = response.data[0]._id
-            console.log('User ID: ' + this.posts.userId)
-
-            const formData = new FormData()
-            formData.append('picture', this.selectedFile)
-
-            return axios.put(
-              'http://localhost:3000/users/' + this.posts.userId + '/picture',
-              formData
-            )
-          })
-          .then((response) => {
-            // Handle the response after successful upload
-            console.log('Image uploaded successfully')
-            console.log(this.posts.userId)
-          })
-          .catch((error) => {
-            // Handle the error if the upload fails
-            console.error('Error uploading image', error)
-          })
-      }
     }
   }
 }
@@ -177,17 +127,6 @@ h1 {
 h3 {
   font-size: max(1.5vw, 16pt);
 }
-.photo {
-  border: 0;
-  border-radius: 100%;
-  width: 40%;
-  margin-bottom: 10vh;
-  /*height:19vh;*/
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  aspect-ratio: 1 / 1;
-}
 .title {
   display: flex;
   flex-direction: column;
@@ -209,10 +148,6 @@ input {
 }
 input::placeholder {
   color: white;
-}
-.file {
-  height: 100%;
-  padding: 1vw;
 }
 button {
   width: 100%;

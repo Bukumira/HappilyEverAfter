@@ -19,7 +19,6 @@ class UserService {
         username: post.username,
         password: post.password,
         email: post.email,
-        picture: post.picture,
         createdAt: new Date(post.createdAt)
       }))
     } catch (error) {
@@ -47,8 +46,7 @@ class UserService {
             name: post.name,
             username: post.username,
             password: post.password,
-            email: post.email,
-            picture: post.picture
+            email: post.email
           }))
         )
       } catch (error) {

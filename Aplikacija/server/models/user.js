@@ -24,10 +24,6 @@ const userSchema = mongose.Schema(
       required: [true, "Unesite E-mail"],
       unique: [true, "Email address already taken"],
     },
-    picture: {
-      type: Buffer,
-      contentType: String,
-    },
     usluge: { type: [Object] },
     chats: {
       type: [String],

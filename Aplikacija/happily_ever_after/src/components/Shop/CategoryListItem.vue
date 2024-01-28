@@ -166,7 +166,7 @@
     },
     methods:{
         like(){
-            console.log(this.pred._id);
+            //console.log(this.pred._id);
             if(!this.liked)
                 this.$emit('like',this.pred._id);
             else
