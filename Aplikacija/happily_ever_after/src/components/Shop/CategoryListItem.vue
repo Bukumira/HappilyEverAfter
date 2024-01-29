@@ -1,7 +1,7 @@
 <template>
     <div :class="this.open?'slika openImg':'slika'" :style="`background-image: url(http://localhost:3000${pred.img})`">
-        <img class="srce" :src="likeImg" @click="like()"/>
-        <img class="reserved" v-if="reserved" src="src/assets/reserved.png" @click="like()"/>
+        <img class="srce" v-if="!isCoord" :src="likeImg" @click="like()"/>
+        <img class="reserved" v-if="reserved && !isCoord" src="src/assets/reserved.png" @click="like()"/>
         <img v-if="open" class="close" src="src/assets/close.png" @click="close()"/>
     </div>
     <div :class="open?'opis openText':'opis'" @click="otvori()">
@@ -40,7 +40,7 @@
             </p>
             <a v-if="open && pred.link" :href="pred.link">{{ pred.link }}</a>
 
-        <div class="extra" v-if="open">
+        <div class="extra" v-if="open && !isCoord">
             <h2 class="naslov">Rezervišite</h2>
             <label for="godina">Godina </label>
             <select name="godina" v-model="godina">
@@ -91,7 +91,7 @@
                     <h2>{{ review.grade }}</h2>
                 </div>
             </div>
-            <div class="add_review" v-if="can_review && !added_review">
+            <div class="add_review" v-if="can_review && !added_review && !isCoord">
                 <div class="starPos">
                     <Stars @grade="grade"></Stars>
                 </div>
@@ -138,6 +138,10 @@
         can_review:{
             type:Boolean,
             default:true
+        },
+        isCoord:{
+            type:Boolean,
+            default:false
         }
     },
     data(){
@@ -162,7 +166,7 @@
     },
     methods:{
         like(){
-            console.log(this.pred._id);
+            console.log(this.isCoord);
             if(!this.liked)
                 this.$emit('like',this.pred._id);
             else
@@ -389,6 +393,7 @@ h2,h4,p{
     top:5%;
     left:5%;
     height: 2vw;
+    background-color: rgb(0, 0, 0);
     transition: all 0.5s ease;
 }
 .naslov{

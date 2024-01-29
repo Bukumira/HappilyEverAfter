@@ -52,6 +52,7 @@
             :predmeti="this.predmeti"
             :liked="this.liked"
             :reserved="this.reserved"
+            :isCoord="this.isCoord"
           />
         </div>
       </div>
@@ -113,7 +114,8 @@ export default {
       subservice: null,
       allSubservices: [],
       user_id: '',
-      loaded: true
+      loaded: true,
+      isCoord: true
     }
   },
   async created() {
@@ -257,6 +259,7 @@ export default {
         if (users.length > 0) {
           this.liked = users[0].liked
           this.reserved = users[0].reserved
+          this.isCoord = users[0].userType != undefined
         }
       } catch (error) {
         console.log('Error:', error.response.data)

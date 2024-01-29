@@ -9,7 +9,7 @@
     </div>
     <div class="listContainer" v-if="itemOpen==null">
         <div class="photo" v-for="(pred,index) in predmeti" :key="index">
-            <CategoryListItem @open="open" @like="addToLiked" @unlike="removeFromLiked" :pred="pred" :liked="isLiked(pred)" :reserved="isReserved(pred)"/>
+            <CategoryListItem @open="open" @like="addToLiked" :isCoord="this.isCoord" @unlike="removeFromLiked" :pred="pred" :liked="isLiked(pred)" :reserved="isReserved(pred)"/>
         </div>
     </div>
     <div v-if="itemOpen!=null" class="dark">
@@ -23,6 +23,7 @@
                               :liked="isLiked(itemOpen)" 
                               :reserved="isReserved(itemOpen)" 
                               :pred="itemOpen"
+                              :isCoord="this.isCoord"
                               :date_taken="date_taken"/>
         </div>
     </div>
@@ -61,6 +62,10 @@ import UserService from '../../Service.js'
         has_pagination:{
             type:Boolean,
             default:true,
+        },
+        isCoord:{
+            type:Boolean,
+            default:false
         }
     },
     data(){
