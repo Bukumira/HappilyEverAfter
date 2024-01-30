@@ -1,13 +1,11 @@
 const errorHandler = require("./middleware/errorHandler");
-const cookieParser = require("cookie-parser");
-const { createTokens, validateToken } = require("./config/JWT");
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const multer = require("multer");
-const fs = require("fs");
 const BrideController = require("./controllers/bride");
 const CakeController = require("./controllers/cake");
+const ChatController = require("./controllers/chat");
 const CosmeticSalonController = require("./controllers/cosmeticSalon");
 const DanceLessonsController = require("./controllers/danceLessons");
 const DecorationController = require("./controllers/decoration");
@@ -22,7 +20,6 @@ const UserController = require("./controllers/user");
 const ServiceController = require("./controllers/service");
 const User = require("./models/user");
 const app = express();
-const CosmeticSalonService = require("./models/service");
 const Service = require("./models/service");
 const cors = require("cors");
 
@@ -168,6 +165,9 @@ app.put("/other/:id", OtherController.put_other);
 //srvice
 app.put("/service/:id", ServiceController.put_service);
 app.post("/service/get_services_by_ids", ServiceController.get_services_by_ids);
+//chat
+app.put("/chat/get_chat", ChatController.get_chat);
+app.put("/chat/add_message", ChatController.add_message);
 //user
 app.put("/user/id/:id", UserController.put_user);
 app.put("/user/add_liked", UserController.add_liked);
@@ -221,11 +221,7 @@ app.get("/users/username/:username", UserController.get_user_by_username);
 app.delete("/user/:username", UserController.delete_user_by_username);
 app.delete("/user/id/:id", UserController.delete_user);
 app.get("/users/id/:id", UserController.get_user_by_id);
-app.put(
-  "/users/:id/picture",
-  upload.single("picture"),
-  UserController.post_picture_for_user
-);
+
 app.get("/user/email/:email", UserController.get_user_by_email);
 
 //user end
@@ -245,10 +241,6 @@ app.get("/search/filter/:price", async (req, res) => {
       .status(500)
       .json({ error: "An error occurred while fetching the services." });
   }
-});
-app.get("/user/logout", async (req, res) => {
-  res.cookie("jwt", "", { maxAge: 1 });
-  res.redirect("/");
 });
 app.get("/search/:key", async (req, resp) => {
   let data = await Service.find({
@@ -280,13 +272,6 @@ app.post("/user/login", async (req, res) => {
         .status(400)
         .json({ error: "Wrong Username and Password Combination!" });
     } else {
-      const accessToken = createTokens(user);
-
-      res.cookie("access-token", accessToken, {
-        maxAge: 60 * 60 * 24 * 30 * 1000,
-        //httpOnly: true,
-      });
-      req.user = user;
       return res.json(email);
     }
   } catch (error) {
@@ -296,18 +281,11 @@ app.post("/user/login", async (req, res) => {
   }
 });
 
-app.get("/user/current", validateToken, (req, res) => {
-  const currentUser = req.user;
-  if (!currentUser) {
-    return res.status(400).json({ error: "User not Authenticated!" });
-  }
-  res.json(currentUser);
-});
 //route
 mongoose.set("strictQuery", false);
 mongoose
   .connect(
-    "mongodb+srv://julijaristic0509:happilyeverafter@cluster0.lggsukm.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://admin:admin@happily.qmtoszu.mongodb.net/Node-API?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

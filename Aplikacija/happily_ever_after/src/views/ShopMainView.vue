@@ -118,18 +118,6 @@ export default {
       isCoord: true
     }
   },
-  async created() {
-    try {
-      const response = await axios.get('http://localhost:3000/user/current', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-      })
-      console.log(response.data)
-    } catch (error) {
-      console.log('Error:', error.response.data)
-    }
-  },
   async mounted() {
     window.scrollTo(0, 0)
   },
