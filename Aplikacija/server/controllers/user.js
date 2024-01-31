@@ -30,7 +30,6 @@ const filter_users_name = async (req, res) => {
       to_return.push({
         _id: user._id,
         name: user.name,
-        img: user.picture,
       });
     });
     res.status(200).json(to_return);
@@ -48,7 +47,6 @@ const get_users_with_ids = async (req, res) => {
       to_return.push({
         _id: user._id,
         name: user.name,
-        img: user.picture,
       });
     });
     res.status(200).json(to_return);
@@ -63,13 +61,6 @@ const put_user = async (req, res) => {
     const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: `User with id ${id} not found` });
-    }
-
-    // Check if the request body contains the password field
-    if (req.body.password) {
-      // Encrypt the new password
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      req.body.password = hashedPassword;
     }
 
     // Update the user with the request body
@@ -229,33 +220,6 @@ const get_user_by_email = async (req, res) => {
     res.status(500).send("Error retrieving users");
   }
 };
-const post_picture_for_user = async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No file uploaded" });
-    }
-
-    const userId = req.params.id;
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    // Access the file buffer from the multer upload
-    const pictureBuffer = req.file.buffer;
-
-    // Save the picture buffer to the user's picture field in the database
-    user.picture = pictureBuffer;
-    await user.save();
-    const imageUrl = `http://localhost:3000/images/${req.file.filename}`;
-
-    res.status(200).json({ message: "Picture updated successfully" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, username, email, password } = req.body;
@@ -269,14 +233,11 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("User already registered!");
   }
 
-  //Hash password
-  const hashedPassword = await bcrypt.hash(password, 10);
-  console.log("Hashed Password: ", hashedPassword);
   const user = await User.create({
     name,
     username,
     email,
-    password: hashedPassword,
+    password,
   });
 
   console.log(`User created ${user}`);
@@ -299,7 +260,6 @@ module.exports = {
   get_user_by_name,
   get_user_by_username,
   delete_user_by_username,
-  post_picture_for_user,
   registerUser,
   get_user_by_email,
   add_liked,
