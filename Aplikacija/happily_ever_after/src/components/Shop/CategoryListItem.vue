@@ -45,7 +45,7 @@
             <label for="godina">Godina </label>
             <select name="godina" v-model="godina">
                 <option v-for="i in 10" :key="i">
-                    {{ i+2022 }}
+                    {{ i+2023 }}
                 </option>
             </select>
             <label for="mesec">Mesec </label>
