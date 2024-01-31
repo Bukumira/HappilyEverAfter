@@ -260,7 +260,8 @@ app.post("/user/login", async (req, res) => {
     if (!user) return res.status(400).json({ error: "User Doesn't Exist" });
 
     const dbPassword = user.password;
-    const match = password === dbPassword;
+    const match = password === dbPassword; // bcrypt.compare(password, dbPassword);
+
 
     if (!match) {
       return res

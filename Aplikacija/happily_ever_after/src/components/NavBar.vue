@@ -30,7 +30,6 @@
           <li><router-link to="/shopmain">Proizvodi</router-link></li>
           <li v-if="!visible"><router-link to="/liked">Lajkovano</router-link></li>
           <li v-if="!visible"><router-link to="/reserved">Rezervisano</router-link></li>
-          <li><router-link to="/chat">Poruke</router-link></li>
           <li v-if="!visible"><router-link to="/shopcontact">Kontakt</router-link></li>
           <li v-if="visible"><router-link to="/adminPage">Korisnici</router-link></li>
           <li v-if="visible"><router-link to="/servicesPage">Usluge</router-link></li>
@@ -52,7 +51,6 @@
         <router-link to="/shopmain">Proizvodi</router-link>
         <router-link v-if="!visible" to="/liked">Lajkovano</router-link>
         <router-link v-if="!visible" to="/reserved">Rezervisano</router-link>
-        <router-link to="/chat">Poruke</router-link>
         <router-link v-if="!visible" to="/shopcontact">Kontakt</router-link>
         <router-link v-if="visible" to="/adminPage">Korisnici</router-link>
         <router-link v-if="visible" to="/servicesPage">Usluge</router-link>

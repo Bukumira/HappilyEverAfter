@@ -10,7 +10,6 @@ import RegisterView from '../views/RegisterView.vue'
 import ShopMainView from '../views/ShopMainView.vue'
 import AccountView from '../views/AccountView.vue'
 import ShopContactView from '../views/ShopContactView.vue'
-import ChatView from '../views/ChatView.vue'
 import AdminPageView from '../views/AdminPageView.vue'
 import ServicesTableView from '../views/ServicesTableView.vue'
 import AddServiceView from '../views/AddServiceView.vue'
@@ -115,15 +114,6 @@ const router = createRouter({
       path: '/shopcontact',
       name: 'shopcontact',
       component: ShopContactView,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem('token')) next()
-        else router.push('/')
-      }
-    },
-    {
-      path: '/chat',
-      name: 'chat',
-      component: ChatView,
       beforeEnter: (to, from, next) => {
         if (localStorage.getItem('token')) next()
         else router.push('/')

@@ -10,7 +10,6 @@
                 <li><router-link to="/shopmain">Proizvodi</router-link></li>
                 <li><router-link to="/liked">Lajkovano</router-link></li>
                 <li><router-link to="/reserved">Rezervisano</router-link></li>
-                <li><router-link to="/chat">Poruke</router-link></li>
                 <li><router-link to="/shopcontact">Kontakt</router-link></li>
             </ul>
             <ul v-if="!inStore">
