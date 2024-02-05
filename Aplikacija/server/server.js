@@ -13,7 +13,7 @@ const JewelleryStoreController = require("./controllers/jewelleryStore");
 const MusicController = require("./controllers/music");
 const OtherController = require("./controllers/other");
 const PhotoStudioController = require("./controllers/photoStudio");
-const RegistrarController = require("./controllers/registrar");
+const RegistrarController = require("./controllers/registrar");0
 const RestaurantController = require("./controllers/restaurant");
 const UserController = require("./controllers/user");
 const ServiceController = require("./controllers/service");
@@ -262,7 +262,6 @@ app.post("/user/login", async (req, res) => {
     const dbPassword = user.password;
     const match = password === dbPassword; // bcrypt.compare(password, dbPassword);
 
-
     if (!match) {
       return res
         .status(400)
@@ -281,7 +280,8 @@ app.post("/user/login", async (req, res) => {
 mongoose.set("strictQuery", false);
 mongoose
   .connect(
-    "mongodb+srv://admin:admin@happily.qmtoszu.mongodb.net/Node-API?retryWrites=true&w=majority",
+    //"mongodb+srv://admin:admin@happily.qmtoszu.mongodb.net/Node-API?retryWrites=true&w=majority",
+    "mongodb+srv://julijaristic0509:happilyeverafter@cluster0.lggsukm.mongodb.net/?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

@@ -25,9 +25,6 @@ const userSchema = mongose.Schema(
       unique: [true, "Email address already taken"],
     },
     usluge: { type: [Object] },
-    chats: {
-      type: [String],
-    },
     reserved: {
       type: [String],
     },
