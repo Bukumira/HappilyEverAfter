@@ -42,7 +42,7 @@
         </div>
         <div class="form-column">
           <div class="form-group">
-            <input placeholder="Slika" type="file" name="slika" @change="handleImageUpload" />
+            <input placeholder="Slika" type="text" name="slika" v-model="service.img" />
           </div>
           <div class="form-group">
             <input placeholder="Datumi" type="date" name="datumi" v-model="service.reserved_dates" />
