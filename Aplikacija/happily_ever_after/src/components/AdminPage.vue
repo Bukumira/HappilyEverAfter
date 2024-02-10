@@ -30,6 +30,7 @@
 
 <script>
 import Service from '../Service'
+import UserService from '../Service.js'
 
 export default {
   name: 'Service',
@@ -42,6 +43,8 @@ export default {
   async created() {
     try {
       this.users = await Service.getAllUsers()
+      this.users = this.users.filter((user) => user.userType === undefined && user.password !== "###deleted###")
+      //console.log(this.users);
     } catch (error) {
       this.error = error.message
     }
@@ -49,8 +52,14 @@ export default {
   methods: {
     async deleteUser(userId) {
       try {
-        await Service.deleteUser(userId)
-        this.users = this.users.filter((user) => user._id !== userId)
+        //await Service.deleteUser(userId)
+        const userData = {
+          password: "###deleted###"
+        }
+
+        await UserService.saveUser(userId, userData);
+        
+        this.users = this.users.filter((user) => user._id !== userId);
       } catch (error) {
         console.error(error)
       }
