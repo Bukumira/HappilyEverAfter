@@ -2,20 +2,16 @@
     <div class = "contactContainer"> 
         <div class="forma">
             <h2>KONTAKTIRAJTE NAS</h2>
-            <p>Pošaljite nam poruku</p>
-            <div class="ime">
-                <input class="margin" type="text" placeholder="Ime" v-model="ime" required/>
-                <input class="email" type="email" placeholder="theappangels@gmail.com" readonly value="theappangels@gmail.com"/>
+            <div class="info">
+        <p class="sub">Povežite se s nama i iskusite vrhunsku uslugu!</p>
+        <p>Adresa: Bulevar Nemanjića 15, Niš</p>
+        <p>Telefon: +381649974169</p>
+        <p>Email: theappangels@gmail.com</p>
+        <p>Otvoreno: Pon - Sub: 8h-20h</p>
             </div>
-            <input type="text" placeholder="Tema" v-model="tema" required/>
-            <textarea placeholder="Poruka" v-model="poruka" required/>
-            <button @click="sendPoruka" :disabled="!formIsValid">POŠALJI PORUKU</button>
         </div>
         <div class="mapadiv">
             <iframe class="map" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Bulevar%20Nemanji%C4%87a%2015+(Happily%20Ever%20After)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" allowfullscreen></iframe>
-        </div>
-        <div v-if="showMessage" class="message">
-            Email sent successfully!
         </div>
 
     </div>
@@ -37,36 +33,7 @@
     formIsValid() {
       return this.ime && this.tema && this.poruka;
     },
-  },
-    mounted() {
-        // Show the message for 5 seconds after page refresh
-    },
-    methods: {
-        sendPoruka() {
-        // Send the message if the form is valid
-        if (this.formIsValid) {
-            // Logic to send the message goes here
-            setTimeout(() => {
-             // Refresh the page after a 2-second delay
-            (this.showMessage = true, 1000);
-        });
-            this.resetForm();
-        }
-        },
-        resetForm() {
-        // Reset the form after sending the message
-        this.ime = "";
-        this.tema = "";
-        this.poruka = "";
-        },
-  
-        refreshPage() {
-            setTimeout(() => {
-            location.reload(); // Refresh the page after a 2-second delay
-            this.showMessage = true;
-            }, 1000);
-        }
-    }
+  }
   };
   </script>
   

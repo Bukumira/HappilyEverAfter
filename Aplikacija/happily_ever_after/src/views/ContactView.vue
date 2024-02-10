@@ -4,9 +4,6 @@
   <div class = "content">
     <Contact/>
     <div class="kontakt">
-      <div class="img">
-        <img src="../assets/contact.jpg"/>
-      </div>
       <div class="info">
           <p class="sub">Povežite se s nama i iskusite vrhunsku uslugu!</p>
           <p>Adresa: Bulevar Nemanjića 15, Niš</p>
