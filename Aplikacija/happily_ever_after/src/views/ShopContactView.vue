@@ -2,19 +2,7 @@
   <TopBar short inStore :barText="'KONTAKT'" />
   <div class="content">
     <Contact />
-    <div class="kontakt">
-      <div class="img">
-        <img src="../assets/contact.jpg" />
-      </div>
-      <div class="info">
-        <p class="sub">Povežite se s nama i iskusite vrhunsku uslugu!</p>
-        <p>Adresa: Bulevar Nemanjića 15, Niš</p>
-        <p>Telefon: +381649974169</p>
-        <p>Email: theappangels@gmail.com</p>
-        <p>Otvoreno: Pon - Sub: 8h-20h</p>
-      </div>
     </div>
-  </div>
   <Footer inStore />
 </template>
 
@@ -70,7 +58,7 @@ img {
 }
 .info {
   width: 50%;
-  padding: 3vw;
+  padding: 1vw;
 }
 .content {
   margin-top: 40vh;
