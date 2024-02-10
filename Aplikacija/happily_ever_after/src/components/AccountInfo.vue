@@ -37,7 +37,7 @@
         v-model="confirmPassword"
       />
     </div>
-    <p class="warning" v-if="error">Lozinke se ne poklapaju!</p>
+    <p class="warning" v-if="error">{{this.error}}</p>
     <div class="row">
       <button @click="save">Sačuvaj izmene</button>
     </div>
@@ -73,7 +73,7 @@ export default {
         if (this.newPassword !== this.confirmPassword) {
           throw new Error('Passwords do not match')
         }
-
+        this.error = '';
         // Create a new object to save only the necessary data
         const userData = {
           _id: this.posts._id,
@@ -85,11 +85,12 @@ export default {
 
         // Make an API request to save user data
         await UserService.saveUser(this.posts._id, userData)
-
+        
+        this.error = 'Uspešna promena lozinke!'
         console.log('Changes saved!')
       } catch (error) {
-        console.log(error.message)
-        this.error = 'Error saving user data.'
+        console.log(error.message);
+        this.error = 'Lozinke se ne poklapaju!';
       }
     }
   }
