@@ -71,6 +71,7 @@ const serviceSchema = mongoose.Schema(
     //Specific to cosmetic salons, bride/groom
     subservice: {
       type: String,
+      sparse: true
     },
     //Specific to restaurants
     menus: [
